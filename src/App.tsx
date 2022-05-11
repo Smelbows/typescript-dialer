@@ -25,7 +25,7 @@ export const App = () => {
   useEffect(() => {
     return setOutput([]);
   }, [outputSum]);
-  
+
   const handleDialerClick = (value: string) => {
     setOutput([...output, value]);
   };
@@ -53,8 +53,8 @@ export const App = () => {
             />
           ))}
         </div>
-        <button onClick={() => setOutputSum(sumOutput)}>Sum</button>
-        <p>{outputSum}</p>
+        <button className="button sum" onClick={() => setOutputSum(sumOutput)}>Sum</button>
+        <p className='output-sum'>{outputSum}</p>
       </main>
     </div>
   );

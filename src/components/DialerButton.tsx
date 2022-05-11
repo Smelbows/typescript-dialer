@@ -7,7 +7,7 @@ interface Props {
 
 export const DialerButton = ({ value, onDialerClick }: Props) => {
   return (
-    <button className="dialer-button" onClick={() => onDialerClick(value)}>
+    <button className="button dialer" onClick={() => onDialerClick(value)}>
       {value}
     </button>
   );

@@ -18,6 +18,14 @@ const dialerValues = [
   '#',
 ];
 
+const sumDigits = (digits: string[]): number => {
+  const numberValues = digits
+    .filter((value) => value !== '*' && value !== '#')
+    .map((stringValue) => parseInt(stringValue));
+
+  return numberValues.reduce((partialSum, a) => partialSum + a, 0);
+};
+
 export const App = () => {
   const [output, setOutput] = useState<string[]>([]);
   const [outputSum, setOutputSum] = useState(0);
@@ -28,14 +36,6 @@ export const App = () => {
 
   const handleDialerClick = (value: string) => {
     setOutput([...output, value]);
-  };
-
-  const sumOutput = (): number => {
-    const numberValues = output
-      .filter((value) => value !== '*' && value !== '#')
-      .map((stringValue) => parseInt(stringValue));
-
-    return numberValues.reduce((partialSum, a) => partialSum + a, 0);
   };
 
   return (
@@ -53,8 +53,13 @@ export const App = () => {
             />
           ))}
         </div>
-        <button className="button sum" onClick={() => setOutputSum(sumOutput)}>Sum</button>
-        <p className='output-sum'>{outputSum}</p>
+        <button
+          className="button sum"
+          onClick={() => setOutputSum(sumDigits(output))}
+        >
+          Sum
+        </button>
+        <p className="output-sum">{outputSum}</p>
       </main>
     </div>
   );

@@ -2,39 +2,27 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 
 import { DialerButton } from './components/DialerButton';
+import { DialerValue } from './enums/dialerEnum';
 
-const dialerValues = [
-  '1',
-  '2',
-  '3',
-  '4',
-  '5',
-  '6',
-  '7',
-  '8',
-  '9',
-  '*',
-  '0',
-  '#',
-];
+const dialerValues = Object.values(DialerValue);
 
-const sumDigits = (digits: string[]): number => {
-  const numberValues = digits
+const sumDigits = (values: DialerValue[]): number => {
+  const digits = values
     .filter((value) => value !== '*' && value !== '#')
     .map((stringValue) => parseInt(stringValue));
 
-  return numberValues.reduce((partialSum, a) => partialSum + a, 0);
+  return digits.reduce((partialSum, a) => partialSum + a, 0);
 };
 
 export const App = () => {
-  const [output, setOutput] = useState<string[]>([]);
+  const [output, setOutput] = useState<DialerValue[]>([]);
   const [outputSum, setOutputSum] = useState(0);
 
   useEffect(() => {
-    return setOutput([]);
+    setOutput([]);
   }, [outputSum]);
 
-  const handleDialerClick = (value: string) => {
+  const handleDialerClick = (value: DialerValue) => {
     setOutput([...output, value]);
   };
 

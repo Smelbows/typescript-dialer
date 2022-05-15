@@ -1,8 +1,10 @@
 import React from 'react';
 
+import { DialerValue } from '../enums/dialerEnum';
+
 interface Props {
-  value: string;
-  onDialerClick: (value: string) => void;
+  value: DialerValue;
+  onDialerClick: (value: DialerValue) => void;
 }
 
 export const DialerButton = ({ value, onDialerClick }: Props) => {

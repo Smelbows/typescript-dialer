@@ -14,13 +14,27 @@ const sumDigits = (values: DialerValue[]): number => {
   return digits.reduce((partialSum, a) => partialSum + a, 0);
 };
 
+const outputDisplay = (values: DialerValue[]): string => {
+  return values.join('+');
+};
+
 export const App = () => {
   const [output, setOutput] = useState<DialerValue[]>([]);
   const [outputSum, setOutputSum] = useState(0);
 
-  useEffect(() => {
+  // useEffect(() => {
+  //   setOutput([]);
+  // }, [outputSum]);
+  // useEffect taken away and onSum given directly to
+  // the onClick function. When I added the outputDisplay,
+  // I realised that the effect wasn't taking place every click,
+  // if the value of the sum hadn't changed. The sums were still
+  // accurate but the array was not emptying as outputSum hadn't changed.
+
+  const onSum = () => {
+    setOutputSum(sumDigits(output));
     setOutput([]);
-  }, [outputSum]);
+  };
 
   const handleDialerClick = (value: DialerValue) => {
     setOutput([...output, value]);
@@ -41,10 +55,10 @@ export const App = () => {
             />
           ))}
         </div>
-        <button
-          className="button sum"
-          onClick={() => setOutputSum(sumDigits(output))}
-        >
+        <div className="output-display">
+          <p>{outputDisplay(output)}</p>
+        </div>
+        <button className="button sum" onClick={onSum}>
           Sum
         </button>
         <p className="output-sum">{outputSum}</p>
